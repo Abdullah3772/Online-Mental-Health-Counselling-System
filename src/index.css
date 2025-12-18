@@ -1,0 +1,63 @@
+/* RESET ALL DEFAULT unwanted styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* GLOBAL ROOT */
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #290101;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* REMOVE OLD VITE BODY STYLES */
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+
+  /* Correct background image path */
+  background-image: url('/background.jpg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+
+  display: block;      /* FIX ✓ */
+  overflow-x: hidden;  /* FIX mobile overflow */
+  color: #240202;
+}
+
+/* LINKS */
+a {
+  text-decoration: none;
+  color: #00eaff;
+  font-weight: 600;
+}
+
+/* TABLE TEXT */
+table, th, td {
+  color: #240000;
+  font-size: 18px;
+}
+
+/* BUTTON STYLE RESET */
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* REMOVE unwanted Vite light/dark mode */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #290202;
+    background-color: transparent;
+  }
+}
+@import "react-big-calendar/lib/css/react-big-calendar.css";
