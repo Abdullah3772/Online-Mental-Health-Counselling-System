@@ -1,8 +1,25 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function EmergencySupport() {
-  const [contactMethod, setContactMethod] = useState("");
+export default function AppointmentRequest() {
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    date: "",
+    time: "",
+    description: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    console.log("Form Submitted", form);
+    alert("Appointment request submitted!");
+    setForm({ name: "", phone: "", email: "", date: "", time: "", description: "" });
+  };
 
   return (
     <motion.div
@@ -11,7 +28,7 @@ export default function EmergencySupport() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <h2 style={{ color: "black" }}>Emergency Support</h2>
+      <h2 style={{ color: "black" }}>Appointment Request</h2>
 
       <motion.div
         style={{
@@ -21,68 +38,36 @@ export default function EmergencySupport() {
           borderRadius: "15px",
           background: "rgba(255,255,255,0.08)",
           backdropFilter: "blur(10px)",
-          boxShadow: "0 0 15px #00eaff",
+          boxShadow: "0 0 15px #054a51ff",
           display: "flex",
           flexDirection: "column",
-          gap: "15px",
+          gap: "12px",
         }}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        <input placeholder="Your Name" style={inputStyle} />
-        <input placeholder="Contact Number" type="tel" style={inputStyle} />
-
-        <select style={selectStyle}>
-          <option value="">Select Type of Emergency</option>
-          <option value="suicidal">Suicidal Thoughts</option>
-          <option value="panic">Panic Attack</option>
-          <option value="violent">Violence / Abuse</option>
-          <option value="selfharm">Self-Harm Risk</option>
-          <option value="medical">Medical Emergency</option>
-          <option value="other">Other</option>
-        </select>
-
-        <div style={{ textAlign: "left", color: "black" }}>
-          <p style={{ marginBottom: "5px", fontWeight: "bold" }}>Preferred Contact Method:</p>
-          <label style={{ marginRight: "15px" }}>
-            <input
-              type="radio"
-              name="contactMethod"
-              value="call"
-              onChange={() => setContactMethod("call")}
-            />{" "}
-            Call
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="contactMethod"
-              value="chat"
-              onChange={() => setContactMethod("chat")}
-            />{" "}
-            Chat
-          </label>
-        </div>
-
-        <textarea
-          placeholder="Describe the Emergency"
-          rows="3"
-          style={textareaStyle}
-        ></textarea>
+        <input name="name" placeholder="Your Name" type="text" value={form.name} onChange={handleChange} style={inputStyle} />
+        <input name="phone" placeholder="Phone Number" type="tel" value={form.phone} onChange={handleChange} style={inputStyle} />
+        <input name="email" placeholder="Email Address" type="email" value={form.email} onChange={handleChange} style={inputStyle} />
+        <input name="date" placeholder="Select Date" type="date" value={form.date} onChange={handleChange} style={inputStyle} />
+        <input name="time" placeholder="Select Time" type="time" value={form.time} onChange={handleChange} style={inputStyle} />
+        <textarea name="description" placeholder="Describe your illness / issue" rows="3" value={form.description} onChange={handleChange} style={textareaStyle}></textarea>
 
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           style={buttonStyle}
+          onClick={handleSubmit}
         >
-          Send Alert
+          Submit Request
         </motion.button>
       </motion.div>
     </motion.div>
   );
 }
 
+// Styles same as before
 const inputStyle = {
   padding: "10px",
   borderRadius: "8px",
@@ -93,16 +78,7 @@ const inputStyle = {
   boxShadow: "0 0 4px rgba(0,0,0,0.2)",
 };
 
-const selectStyle = {
-  ...inputStyle,
-  color: "black",
-  cursor: "pointer",
-};
-
-const textareaStyle = {
-  ...inputStyle,
-  resize: "none",
-};
+const textareaStyle = { ...inputStyle, resize: "none" };
 
 const buttonStyle = {
   padding: "12px",
